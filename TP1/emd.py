@@ -10,18 +10,23 @@ imptos = 0
 numero_de_atletas = len(linhas)
 
 for linha in linhas:
-    campos = linha.split(",")
-    modalidade = campos[8]
-    apto = campos[12].strip()
+    campo = linha.split(",")
+    modalidade = campo[8]
+    apto = campo[12].strip()
+    idade = int(campo[5])
+    
+    # Verifica se a modalidade já está na lista
+    if modalidade not in modalidades:
+        # Caso não esteja adciona-a
+        modalidades.append(modalidade)
+    
     # Verifica se o altleta está apto ou não
     if apto == 'true':
         aptos += 1
     elif apto == 'false':
         imptos += 1
-    # Verifica se a modalidade já está na lista
-    if modalidade not in modalidades:
-        # Caso não esteja adciona-a
-        modalidades.append(modalidade)
+    
+    print(idade)
 
 modalidades.sort()
 
