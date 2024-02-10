@@ -34,12 +34,12 @@ for linha in linhas:
     else:
         escaloes[escalao] = 1
 
-modalidades.sort()
+modalidades.sort() # Ordena a lista de modalidades
 
 print("Modalidades:", modalidades)
-print("Porcentagem de atletas aptos: {:.2f}%".format(aptos / numero_de_atletas * 100))
-print("Porcentagem de atletas imptos: {:.2f}%".format(imptos / numero_de_atletas * 100))
+print(f"Porcentagem de atletas aptos: {aptos / numero_de_atletas * 100:.2f}% ({aptos} atletas)")
+print(f"Porcentagem de atletas imptos: {imptos / numero_de_atletas * 100:.2f}% ({imptos} atletas)")
 print("Distribuição de atletas por escalão etário:")
-for escalao, num_atletas in escaloes.items():
-    porcentagem = (num_atletas / numero_de_atletas) * 100
-    print(f"Escalão {escalao}: {num_atletas} atletas ({porcentagem:.2f}%)")
+for escalao, numero_de_atletas_p_escalao in escaloes.items():
+    porcentagem = (numero_de_atletas_p_escalao / numero_de_atletas) * 100
+    print(f"- Escalão {escalao}: {porcentagem:.2f}% ({numero_de_atletas_p_escalao} atletas)")
