@@ -37,7 +37,7 @@ for linha in linhas:
 
 print("Modalidades:")
 for i, modalidade in enumerate(sorted(modalidades), 1):
-    print(f"- Modalidade {i}: {modalidade}")
+    print(f"- Modalidade {i}: {modalidade.capitalize()}")
 print(f"Porcentagem de atletas aptos: {aptos / numero_de_atletas * 100:.2f}% ({aptos} atletas)")
 print(f"Porcentagem de atletas inaptos: {inaptos / numero_de_atletas * 100:.2f}% ({inaptos} atletas)")
 print("Distribuição de atletas por escalão etário:")
