@@ -1,6 +1,7 @@
 import sys
 import re
 
+# Regex para dividir uma linha csv
 divisao_patern = re.compile(r',')
 
 sys.stdin.readline()
