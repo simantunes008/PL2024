@@ -21,7 +21,7 @@ for linha in linhas:
     if campos[8].lower() not in modalidades:
         modalidades.append(campos[8].lower())
     
-    # Verifica se o atleta está apto
+    # Verifica se o atleta está apto através de um Regex Match
     if re.match(r'^true$', campos[12].lower()):
         aptos += 1
     elif re.match(r'^false$', campos[12].lower()):
