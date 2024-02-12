@@ -1,7 +1,9 @@
 import sys
+import re
+
+divisao_patern = re.compile(r',')
 
 sys.stdin.readline()
-
 linhas = sys.stdin.readlines()
 
 modalidades = []
@@ -11,24 +13,22 @@ numero_de_atletas = len(linhas)
 escaloes = {}
 
 for linha in linhas:
-    campo = linha.split(",")
-    modalidade = campo[8].strip().lower()
-    apto = campo[12].strip().lower()
-    idade = int(campo[5])
+    linha = linha.rstrip('\n')
+    campos = divisao_patern.split(linha)
     
-    # Verifica se a modalidade já está na lista
-    if modalidade not in modalidades:
-        # Caso não esteja adciona-a
-        modalidades.append(modalidade)
+    # Verifica se a modalidade já existe e adiciona-a
+    if campos[8].lower() not in modalidades:
+        modalidades.append(campos[8].lower())
     
-    # Verifica se o altleta está apto ou não
-    if apto == 'true':
+    # Verifica se o atleta está apto
+    if re.match(r'^true$', campos[12].lower()):
         aptos += 1
-    elif apto == 'false':
+    elif re.match(r'^false$', campos[12].lower()):
         imptos += 1
     
-    # Calcula o escalão com base na idade
-    escalao = idade // 5 # Divisão inteira por 5
+    # Calcula o escalão com base na divisão inteira por 5
+    idade = int(campos[5])
+    escalao = idade // 5
     if escalao in escaloes:
         escaloes[escalao] += 1
     else:
