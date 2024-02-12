@@ -9,7 +9,7 @@ linhas = sys.stdin.readlines()
 
 modalidades = []
 aptos = 0
-imptos = 0
+inaptos = 0
 numero_de_atletas = len(linhas)
 escaloes = {}
 
@@ -17,29 +17,29 @@ for linha in linhas:
     linha = linha.rstrip('\n')
     campos = divisao_patern.split(linha)
     
-    # Verifica se a modalidade já existe e adiciona-a
+    # Verifica se a modalidade já está na lista e caso contrário adiciona-a
     if campos[8].lower() not in modalidades:
         modalidades.append(campos[8].lower())
     
-    # Verifica se o atleta está apto através de um Regex Match
+    # Verifica através do Regex se um atleta está apto ou não
     if re.match(r'^true$', campos[12].lower()):
         aptos += 1
     elif re.match(r'^false$', campos[12].lower()):
-        imptos += 1
+        inaptos += 1
     
-    # Calcula o escalão com base na divisão inteira por 5
-    idade = int(campos[5])
-    escalao = idade // 5
-    if escalao in escaloes:
-        escaloes[escalao] += 1
-    else:
-        escaloes[escalao] = 1
+    # Verifica através do Regex se a idadde é um inteiro válido
+    if re.match(r'^\d+$', campos[5]):
+        escalao = int(campos[5]) // 5
+        if escalao in escaloes:
+            escaloes[escalao] += 1
+        else:
+            escaloes[escalao] = 1
 
-modalidades.sort() # Ordena a lista de modalidades
-
-print("Modalidades:", modalidades)
+print("Modalidades:")
+for i, modalidade in enumerate(sorted(modalidades), 1):
+    print(f"- Modalidade {i}: {modalidade}")
 print(f"Porcentagem de atletas aptos: {aptos / numero_de_atletas * 100:.2f}% ({aptos} atletas)")
-print(f"Porcentagem de atletas imptos: {imptos / numero_de_atletas * 100:.2f}% ({imptos} atletas)")
+print(f"Porcentagem de atletas inaptos: {inaptos / numero_de_atletas * 100:.2f}% ({inaptos} atletas)")
 print("Distribuição de atletas por escalão etário:")
 for escalao, numero_de_atletas_p_escalao in escaloes.items():
     porcentagem = (numero_de_atletas_p_escalao / numero_de_atletas) * 100
