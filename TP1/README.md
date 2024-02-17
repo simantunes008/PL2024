@@ -14,4 +14,4 @@ O objetivo deste TPC é ler um determinado dataset, processá-lo e obter uma lis
 `python3 emd.py < emd.csv`
 
 ## Resultados obtidos
-![Texto alternativo](Resultados.png)
+![Texto alternativo](resultados.png)
