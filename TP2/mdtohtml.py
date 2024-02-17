@@ -3,24 +3,34 @@ import sys
 
 def markdown_to_html(markdown):
     # Cabeçalhos
-    markdown = re.sub(r'#{3}\s+(.*)', r'<h3>\1</h3>', markdown)
-    markdown = re.sub(r'#{2}\s+(.*)', r'<h2>\1</h2>', markdown)
-    markdown = re.sub(r'#{1}\s+(.*)', r'<h1>\1</h1>', markdown)
+    markdown = re.sub(r'###\s+(.*)', r'<h3>\1</h3>', markdown)
+    markdown = re.sub(r'##\s+(.*)', r'<h2>\1</h2>', markdown)
+    markdown = re.sub(r'#\s+(.*)', r'<h1>\1</h1>', markdown)
     
-    # Negritos
-    markdown = re.sub(r'\*{2}(.*?)\*{2}', r'<b>\1</b>', markdown)
+    # Negrito
+    markdown = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', markdown)
     
-    # Itálicos
-    markdown = re.sub(r'\*{1}(.*?)\*{1}', r'<i>\1</i>', markdown)
+    # Itálico
+    markdown = re.sub(r'\*(.*?)\*', r'<i>\1</i>', markdown)
     
-    # Listas numeradas
+    # Linha horizontal
+    markdown = re.sub(r'---', r'<hr/>', markdown)
+    
+    # Bloco de código
+    markdown = re.sub(r'`(.*?)`', r'<code>\1</code>', markdown)
+    
+    # Lista numerada
     markdown = re.sub(r'(\d+\.\s+.*\n?)+', r'<ol>\g<0></ol>', markdown)
-    markdown = re.sub(r'\d+\.\s+(.*)', r'<li>\1</li>', markdown)
+    markdown = re.sub(r'\d+\.\s+(.*)', r'<li>\1</li>\n', markdown)
     
-    # Imagens
+    # Lista não numerada
+    markdown = re.sub(r'(-\s+.*\n?)+', r'<ul>\g<0></ul>', markdown)
+    markdown = re.sub(r'-\s+(.*)', r'<li>\1</li>\n', markdown)
+    
+    # Imagem
     markdown = re.sub(r'!\[(.*?)\]\((.*?)\)', r'<img src="\2" alt="\1"/>', markdown)
     
-    # Links
+    # Link
     markdown = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\2">\1</a>', markdown)
     
     return markdown
