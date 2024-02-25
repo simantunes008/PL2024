@@ -15,5 +15,7 @@ O objetivo deste TPC construir um pequeno somador escrito em python que dado um 
 
 ## Resultados obtidos
 **Input:** sadoffjaposdj11asdabOnsdl10sadldn=akd34sdalOFF<dasd=ad4er45adsadawdonedadsdO5nefSDdaoffdadna=dnadadsadonmailDhsadpjAd32opjAdjaSfasf
+
 **Ouput:** 
+
 ![Texto alternativo](resultados.png)
