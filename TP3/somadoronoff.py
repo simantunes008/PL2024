@@ -1,28 +1,39 @@
-import sys
-import re
+import sys, re
 
-def somador_on_off(text):
-    pattern_on_off = re.compile(r'on.*?off|=', re.IGNORECASE)
-    pattern_inteiros = re.compile(r'[+-]?\d+|=')
+def somador_on_off(texto):
+    token_specification = [
+        ('INT', r'[+-]?\d+'),             
+        ('ON',  r'[oO][nN]'),             
+        ('OFF', r'[oO][fF]{2}'),
+        ('EQ', r'=')
+    ]
+    pattern = '|'.join('(?P<%s>%s)' % pair for pair in token_specification)
     
-    matches = pattern_on_off.findall(text)
-    
-    result = []
-    
-    for match in matches:
-        result.extend(pattern_inteiros.findall(match))
-    
+    estado = True
     soma = 0
-    for item in result:
-        if item == '=':
-            print(soma)
+    iterador = 0
+    
+    while iterador < len(texto):
+        m = re.match(pattern, texto[iterador:])
+        if m:
+            token = m.groupdict()
+            iterador = iterador + m.end()
+            if token['EQ']:
+                print('=', soma)
+            elif token['ON']:
+                estado = True
+            elif token['OFF']:
+                estado = False
+            elif token['INT']:
+                if estado:
+                    valor = int(m.group('INT'))
+                    soma = soma + valor
         else:
-            soma += int(item)
-    return soma
+            iterador += 1
 
 def main():
     input = sys.stdin.read()
-    print(somador_on_off(input))
+    somador_on_off(input)
 
 if __name__ == '__main__':
     main()
