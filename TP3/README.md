@@ -15,11 +15,19 @@ O objetivo deste TPC construir um pequeno somador escrito em python que dado um 
 
 ## Resultados obtidos
 **Input:** 
-Este texto contém várias sequências de dígitos para testar o somador. 
+
+Este texto contém várias sequências de dígitos para testar o somador.
+
 Por exemplo os número 123 e 456 devem ser somados '='.
+
 A partir de agora o somador está desligado, oFf.
+
 Portanto estes número não vão ser somados 24, 37, 98.
+
 Vamos ligar outra vez, On, e somar o 1, 2, 3...  
+
 No final o resultado é '='. 
+
 **Ouput:** 
+
 ![Texto alternativo](resultados.png)
